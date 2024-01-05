@@ -1,9 +1,22 @@
-import { NAV_LINKS } from "@/constants"
-import Image from "next/image"
-import Link from "next/link"
-import Button from "./Button"
+"use client";
+import React, { useState } from "react";
+
+import { NAV_LINKS } from "@/constants";
+import Image from "next/image";
+import Link from "next/link";
+import Button from "./Button";
+import Modal from "./Modal";
 
 const Navbar = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
   return (
     <nav className="flexBetween max-container padding-container relative z-30 py-5">
       <Link href="/">
@@ -33,6 +46,7 @@ const Navbar = () => {
           title="Login"
           icon="/user.svg"
           variant="btn_dark_green"
+          onClick={openModal}
         />
       </div>
 
@@ -43,8 +57,9 @@ const Navbar = () => {
         height={32}
         className="inline-block cursor-pointer lg:hidden"
       />
+      <Modal showModal={showModal} closeModal={closeModal} />
     </nav>
   );
-}
+};
 
-export default Navbar
+export default Navbar;
